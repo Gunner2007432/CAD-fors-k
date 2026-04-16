@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0b1220;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 240px;
+            background-color: #05080f;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .main {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #0f172a;
+            overflow-y: auto;
+        }
+
+        .category {
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: #7f8ea3;
+            text-transform: uppercase;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 6px;
+        }
+
+        .tab {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #0f172a;
+            color: white;
+            border: none;
+            text-align: left;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .tab:hover {
+            background-color: #1e293b;
+        }
+
+        .tab.active {
+            background-color: #2563eb;
+        }
+    </style>
+
+
+    <link rel="stylesheet" href="personopplysninger/personalia/personalia.css">
+    <link rel="stylesheet" href="rapport/rapport.css">
+    <link rel="stylesheet" href="hendelsesrapport/hendelsesrapport.css">
+    <link rel="stylesheet" href="personopplysninger/kjoretoy/kjoretoy.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Oslo Politi Distrikt</h2>
+
+            <p class="category">Personelige Opplysninger</p>
+            <button class="tab" onclick="showPage('personalia', this)">Personalia</button>
+            <button class="tab" onclick="showPage('kjoretoy', this)">Kjøretøy</button>
+            <button class="tab" onclick="showPage('eindommer', this)">Eindommer</button>
+            <button class="tab" onclick="showPage('vapen', this)">Våpen</button>
+
+            <p class="category">juss</p>
+            <button class="tab" onclick="showPage('rapporter', this)">Rapporter</button>
+            <button class="tab" onclick="showPage('hendelsesrapporter', this)">Hendelses Rapporter</button>
+
+            <p class="category">operasjon</p>
+            <button class="tab" onclick="showPage('calls', this)">Calls</button>
+            <button class="tab" onclick="showPage('enheter', this)">Enheter</button>
+        </div>
+
+        <div class="main">
+            
+            
+        <!-- Eindommer-->
+                <div id="eindommer" class="page" style="display: none;">
+                    <h1>Eindommer</h1>
+                    <p>Her skal eindommer være</p>
+                </div>
+            
+        <!-- Kjøretøy -->
+                <div id="kjoretoy" class="page" style="display: none;">
+                    <h1>Kjøretøy</h1>
+                    
+                    <div class="kjoretoy-layout">
+
+                        <!---Venstre--->
+                        <div class="kjoretoy-list-section">
+                            <h2>Kjøretøyliste</h2>
+
+                            <input id="kjoretoySearch" type="text" placeholder="Søk etter kjøretøy...">
+                            
+                            <div id="kjoretoyList">
+                                <div class="kjoretoy-item">
+                                    <div class="kjoretoy-item-plate">AB12345</div>
+                                    <div class="kjoretoy-item-model">Volvo XC90</div>
+                                </div>
+
+                                <div class="kjoretoy-item">
+                                    <div class="kjoretoy-item-plate">CD67890</div>
+                                    <div class="kjoretoy-item-model">Audi RS6</div>
+                                </div>
+
+                                <div class="kjoretoy-item">
+                                    <div class="kjoretoy-item-plate">EF11223</div>
+                                    <div class="kjoretoy-item-model">BMW X5</div>
+                                </div>
+                            </div>
+                        </div>
+                
+
+                        <!---Høyre--->
+                        <div class="kjoretoy-detail-section">
+                            <div id="kjoretoyDetail">
+                                <div class="kjoretoy-header">
+
+                                    <div class="kjoretoy-info-row">
+                                        <span class="kjoretoy-label">Registreringsnummer</span>
+                                        <span class="kjoretoy-value">AB12345</span>
+                                    </div>
+
+                                    <div class="kjoretoy-info-row">
+                                        <span class="kjoretoy-label">Modell</span>
+                                        <span class="kjoretoy-value">Volvo XC90</span>
+                                    </div>
+
+                                    <div class="kjoretoy-info-row">
+                                        <span class="kjoretoy-label">Eier</span>
+                                        <span class="kjoretoy-value">Ola Nordmann</span>
+                                    </div>
+
+                                    <div class="kjoretoy-info-row">
+                                        <span class="kjoretoy-label">Status</span>
+                                        <span class="kjoretoy-value">Ikke etterlyst</span>
+                                    </div>
+
+                                    <div class="kjoretoy-info-row">
+                                        <span class="kjoretoy-label">Farge</span>
+                                        <span class="kjoretoy-value">Sort</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            
+            <!-- Personalia -->
+                <div id="personalia" class="page" style="display: none;">
+                    <h1>Personalia</h1>
+
+                    <div class="personalia-layout">
+
+                        <!-- VENSTRE -->
+                        <div class="personalia-list-section">
+                            <h2>Personliste</h2>
+
+                            <input id="personSearch" placeholder="Søk etter person...">
+
+                            <div id="personList"></div>
+                        </div>
+
+                        <!-- HØYRE -->
+                        <div class="personalia-detail-section">
+                            <div id="personDetail">
+                                <p>Velg en person for å se detaljer</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            <!-- Våpen -->
+                <div id="vapen" class="page" style="display: none;">
+                    <h1>Våpen</h1>
+                    <p>Her skal våpen være</p>
+                </div>
+
+            <!-- RAPPORTER -->
+            <div id="rapporter" class="page">
+                <div id="reportHome">
+                    <h1>Rapporter</h1>
+
+                    <div class="report-home-actions">
+                        <button id="newReportBtn">Ny rapport</button>
+                        <input id="reportSearch" type="text" placeholder="Søk etter rapport...">
+                    </div>
+
+                    <div id="reportList"></div>
+                </div>
+
+                <div id="reportEditor" style="display: none;">
+                    <div class="report-editor-topbar">
+                        <button id="backToReportsBtn">← Tilbake</button>
+                        <h1>Ny rapport</h1>
+                        <button id="saveReportBtn">Lagre rapport</button>
+                    </div>
+
+                    <div class="report-editor-grid">
+                        <div class="report-card">
+                            <label for="reportType">Type</label>
+                            <select id="reportType">
+                                <option value="">Velg type</option>
+                                <option value="Ran">Ran</option>
+                                <option value="Bombetrussel">Bombetrussel</option>
+                                <option value="Skyting">Skyting</option>
+                                <option value="Biljakt">Biljakt</option>
+                                <option value="Kidnapping">Kidnapping</option>
+                                <option value="Annet">Annet</option>
+                            </select>
+                        </div>
+
+                        <div class="report-card">
+                            <label for="reportTitle">Tittel</label>
+                            <input id="reportTitle" placeholder="Skriv tittel på rapport...">
+                        </div>
+
+                        <div class="report-card">
+                            <label for="reportCreator">Oppretter</label>
+                            <input id="reportCreator" placeholder="Oppretter / karakternavn...">
+                        </div>
+
+                        <div class="report-card">
+                            <label for="reportOfficers">Betjenter involvert</label>
+                            <input id="reportOfficers" placeholder="Betjenter involvert...">
+                        </div>
+
+                        <div class="report-card">
+                            <label for="reportCivilians">Sivile involvert</label>
+                            <input id="reportCivilians" placeholder="Sivile involvert...">
+                        </div>
+
+                        <div class="report-card">
+                            <label for="reportEvidence">Bevis</label>
+                            <input id="reportEvidence" placeholder="Bevis...">
+                        </div>
+
+                        <div class="report-card report-card-full">
+                            <label>Tags</label>
+                            <input id="reportTags" type="hidden">
+
+                            <button type="button" id="tagPickerOpenBtn" class="tag-picker-open-btn">
+                                + Legg til tag
+                            </button>
+
+                            <div id="tagPreview" class="tag-preview"></div>
+                        </div>
+
+                        <div id="tagPickerOverlay" class="tag-picker-overlay" style="display: none;">
+                            <div class="tag-picker-modal">
+                                <div class="tag-picker-header">
+                                    <h2>Velg tag</h2>
+                                    <p>Trykk på en tag for å legge den til</p>
+                                </div>
+
+                                <div class="tag-picker-list">
+                                    <button type="button" class="tag-picker-option" data-tag="Ran">Ran</button>
+                                    <button type="button" class="tag-picker-option" data-tag="Gissel">Gissel</button>
+                                    <button type="button" class="tag-picker-option" data-tag="Skyting">Skyting</button>
+                                    <button type="button" class="tag-picker-option" data-tag="Biljakt">Biljakt</button>
+                                    <button type="button" class="tag-picker-option" data-tag="Narkotika">Narkotika</button>
+                                    <button type="button" class="tag-picker-option" data-tag="Våpen">Våpen</button>
+                                    <button type="button" class="tag-picker-option" data-tag="Bank">Bank</button>
+                                    <button type="button" class="tag-picker-option" data-tag="Butikk">Butikk</button>
+                                    <button type="button" class="tag-picker-option" data-tag="Grovt ran">Grovt ran</button>
+                                    <button type="button" class="tag-picker-option" data-tag="Etterforskes">Etterforskes</button>
+                                    <button type="button" class="tag-picker-option" data-tag="Mistenkt">Mistenkt</button>
+                                    <button type="button" class="tag-picker-option" data-tag="Etterlysning">Etterlysning</button>
+                                </div>
+
+                                <button type="button" id="tagPickerCloseBtn" class="tag-picker-close-btn">
+                                    Lukk
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="report-card report-card-full">
+                            <label>Bilder</label>
+
+                            <div id="imageUploadBox" class="image-box">
+                                <p>Trykk for å legge til bilde</p>
+                                <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                            </div>
+
+                            <div id="imagePreviewList" class="image-preview-list"></div>
+                        </div>
+
+                        <div class="report-card report-card-full">
+                            <div class="report-content-layout">
+                                <div class="report-editor-section">
+                                    <label>Hendelsesforløp</label>
+
+                                    <div class="editor-toolbar">
+                                        <button type="button" class="editor-tool-btn" data-command="bold"><b>B</b></button>
+                                        <button type="button" class="editor-tool-btn" data-command="italic"><i>I</i></button>
+                                        <button type="button" class="editor-tool-btn" data-command="underline"><u>U</u></button>
+                                        <button type="button" class="editor-tool-btn" data-command="insertUnorderedList">• Liste</button>
+
+                                        <input type="color" id="editorColorPicker" class="editor-color-picker" value="#ffffff">
+
+                                        <select id="editorFontSize" class="editor-toolbar-select">
+                                            <option value="">Størrelse</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="14">14</option>
+                                            <option value="16">16</option>
+                                            <option value="18">18</option>
+                                            <option value="20">20</option>
+                                            <option value="24">24</option>
+                                            <option value="28">28</option>
+                                            <option value="36">36</option>
+                                        </select>
+
+                                        <select id="editorFontFamily" class="editor-toolbar-select">
+                                            <option value="">Font</option>
+                                            <option value="Arial">Arial</option>
+                                            <option value="Verdana">Verdana</option>
+                                            <option value="Georgia">Georgia</option>
+                                            <option value="Courier New">Courier New</option>
+                                        </select>
+
+                                        <div class="editor-color-row">
+                                            <button type="button" class="color-btn" data-color="#ffffff"></button>
+                                            <button type="button" class="color-btn" data-color="#000000"></button>
+                                            <button type="button" class="color-btn" data-color="#ef4444"></button>
+                                            <button type="button" class="color-btn" data-color="#3b82f6"></button>
+                                            <button type="button" class="color-btn" data-color="#22c55e"></button>
+                                            <button type="button" class="color-btn" data-color="#eab308"></button>
+                                        </div>
+                                    </div>
+
+                                    <div id="reportText" class="report-editor" contenteditable="true"></div>
+                                </div>
+
+                                <div class="report-templates-section">
+                                    <div class="template-panel">
+                                        <div class="template-panel-header">
+                                            <h3>Maler</h3>
+                                            <p>Velg en mal for rapporten</p>
+                                        </div>
+
+                                        <div class="template-list">
+                                            <button type="button" class="template-btn" data-template="standard">Standard rapport</button>
+                                            <button type="button" class="template-btn" data-template="kripos">Kripos-sak</button>
+                                            <button type="button" class="template-btn" data-template="ran">Ran</button>
+                                            <button type="button" class="template-btn" data-template="biljakt">Biljakt</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- HENDELSESRAPPORTER -->
+            <div id="hendelsesrapporter" class="page" style="display: none;">
+                <div id="hendelsesReportHome">
+                    <h1>Hendelses Rapporter</h1>
+
+                    <div class="hendelses-report-home-actions">
+                        <button id="newHendelsesReportBtn">Ny Hendelses Rapport</button>
+                        <input id="hendelsesReportSearch" type="text" placeholder="Søk etter hendelses rapport...">
+                    </div>
+
+                    <div id="hendelsesReportList"></div>
+                </div>
+
+                <div id="hendelsesReportEditor" style="display: none;">
+                    <div class="hendelses-report-editor-topbar">
+                        <button id="backToHendelsesReportsBtn">← Tilbake</button>
+                        <h1>Ny Hendelses Rapport</h1>
+                        <button id="saveHendelsesReportBtn">Lagre Hendelses Rapport</button>
+                    </div>
+
+                    <div class="hendelses-report-editor-grid">
+                        <div class="hendelses-report-card">
+                            <label for="hendelsesReportType">Type</label>
+                            <select id="hendelsesReportType">
+                                <option value="">Velg type</option>
+                                <option value="Arrestasjon">Arrestasjon</option>
+                                <option value="Narkotika">Narkotika</option>
+                                <option value="Våpenlovbrudd">Våpenlovbrudd</option>
+                                <option value="Ran">Ran</option>
+                                <option value="Skyting">Skyting</option>
+                                <option value="Annet">Annet</option>
+                            </select>
+                        </div>
+
+                        <div class="hendelses-report-card">
+                            <label for="hendelsesReportTitle">Tittel</label>
+                            <input id="hendelsesReportTitle" placeholder="Skriv tittel på hendelses rapport...">
+                        </div>
+
+                        <div class="hendelses-report-card">
+                            <label for="hendelsesReportCreator">Oppretter</label>
+                            <input id="hendelsesReportCreator" placeholder="Oppretter / karakternavn...">
+                        </div>
+
+                        <div class="hendelses-report-card">
+                            <label for="hendelsesReportOfficers">Betjenter involvert</label>
+                            <input id="hendelsesReportOfficers" placeholder="Betjenter involvert...">
+                        </div>
+
+                        <div class="hendelses-report-card">
+                            <label for="hendelsesReportCivilians">Sivile involvert</label>
+                            <input id="hendelsesReportCivilians" placeholder="Sivile involvert...">
+                        </div>
+
+                        <div class="hendelses-report-card">
+                            <label for="hendelsesReportEvidence">Bevis</label>
+                            <input id="hendelsesReportEvidence" placeholder="Bevis...">
+                        </div>
+
+                        <div class="hendelses-report-card hendelses-report-card-full">
+                            <label>Tags</label>
+                            <input id="hendelsesReportTags" type="hidden">
+
+                            <button type="button" id="hendelsesTagPickerOpenBtn" class="hendelses-tag-picker-open-btn">
+                                + Legg til tag
+                            </button>
+
+                            <div id="hendelsesTagPreview" class="hendelses-tag-preview"></div>
+                        </div>
+
+                        <div id="hendelsesTagPickerOverlay" class="hendelses-tag-picker-overlay" style="display: none;">
+                            <div class="hendelses-tag-picker-modal">
+                                <div class="hendelses-tag-picker-header">
+                                    <h2>Velg tag</h2>
+                                    <p>Trykk på en tag for å legge den til</p>
+                                </div>
+
+                                <div class="hendelses-tag-picker-list">
+                                    <button type="button" class="hendelses-tag-picker-option" data-tag="Ran">Ran</button>
+                                    <button type="button" class="hendelses-tag-picker-option" data-tag="Gissel">Gissel</button>
+                                    <button type="button" class="hendelses-tag-picker-option" data-tag="Skyting">Skyting</button>
+                                    <button type="button" class="hendelses-tag-picker-option" data-tag="Biljakt">Biljakt</button>
+                                    <button type="button" class="hendelses-tag-picker-option" data-tag="Narkotika">Narkotika</button>
+                                    <button type="button" class="hendelses-tag-picker-option" data-tag="Våpen">Våpen</button>
+                                    <button type="button" class="hendelses-tag-picker-option" data-tag="Bank">Bank</button>
+                                    <button type="button" class="hendelses-tag-picker-option" data-tag="Butikk">Butikk</button>
+                                    <button type="button" class="hendelses-tag-picker-option" data-tag="Grovt ran">Grovt ran</button>
+                                    <button type="button" class="hendelses-tag-picker-option" data-tag="Etterforskes">Etterforskes</button>
+                                    <button type="button" class="hendelses-tag-picker-option" data-tag="Mistenkt">Mistenkt</button>
+                                    <button type="button" class="hendelses-tag-picker-option" data-tag="Etterlysning">Etterlysning</button>
+                                </div>
+
+                                <button type="button" id="hendelsesTagPickerCloseBtn" class="hendelses-tag-picker-close-btn">
+                                    Lukk
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="hendelses-report-card hendelses-report-card-full">
+                            <label>Bilder</label>
+
+                            <div id="hendelsesImageUploadBox" class="hendelses-image-box">
+                                <p>Trykk for å legge til bilde</p>
+                                <input type="file" id="hendelsesImageInput" accept="image/*" style="display: none;">
+                            </div>
+
+                            <div id="hendelsesImagePreviewList" class="hendelses-image-preview-list"></div>
+                        </div>
+
+                        <div class="hendelses-report-card hendelses-report-card-full">
+                            <div class="hendelses-report-content-layout">
+                                <div class="hendelses-report-editor-section">
+                                    <label>Hendelsesforløp</label>
+
+                                    <div class="hendelses-editor-toolbar">
+                                        <button type="button" class="hendelses-editor-tool-btn" data-command="bold"><b>B</b></button>
+                                        <button type="button" class="hendelses-editor-tool-btn" data-command="italic"><i>I</i></button>
+                                        <button type="button" class="hendelses-editor-tool-btn" data-command="underline"><u>U</u></button>
+                                        <button type="button" class="hendelses-editor-tool-btn" data-command="insertUnorderedList">• Liste</button>
+
+                                        <input type="color" id="hendelsesEditorColorPicker" class="hendelses-editor-color-picker" value="#ffffff">
+
+                                        <select id="hendelsesEditorFontSize" class="hendelses-editor-toolbar-select">
+                                            <option value="">Størrelse</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="14">14</option>
+                                            <option value="16">16</option>
+                                            <option value="18">18</option>
+                                            <option value="20">20</option>
+                                            <option value="24">24</option>
+                                            <option value="28">28</option>
+                                            <option value="36">36</option>
+                                        </select>
+
+                                        <select id="hendelsesEditorFontFamily" class="hendelses-editor-toolbar-select">
+                                            <option value="">Font</option>
+                                            <option value="Arial">Arial</option>
+                                            <option value="Verdana">Verdana</option>
+                                            <option value="Georgia">Georgia</option>
+                                            <option value="Courier New">Courier New</option>
+                                        </select>
+
+                                        <div class="hendelses-editor-color-row">
+                                            <button type="button" class="hendelses-color-btn" data-color="#ffffff"></button>
+                                            <button type="button" class="hendelses-color-btn" data-color="#000000"></button>
+                                            <button type="button" class="hendelses-color-btn" data-color="#ef4444"></button>
+                                            <button type="button" class="hendelses-color-btn" data-color="#3b82f6"></button>
+                                            <button type="button" class="hendelses-color-btn" data-color="#22c55e"></button>
+                                            <button type="button" class="hendelses-color-btn" data-color="#eab308"></button>
+                                        </div>
+                                    </div>
+
+                                    <div id="hendelsesReportText" class="hendelses-report-editor" contenteditable="true"></div>
+                                </div>
+
+                                <div class="hendelses-report-templates-section">
+                                    <div class="hendelses-template-panel">
+                                        <div class="hendelses-template-panel-header">
+                                            <h3>Maler</h3>
+                                            <p>Velg en mal for hendelses rapporten</p>
+                                        </div>
+
+                                        <div class="hendelses-template-list">
+                                            <button type="button" class="hendelses-template-btn" data-template="standard">Standard rapport</button>
+                                            <button type="button" class="hendelses-template-btn" data-template="arrest">Arrestrapport</button>
+                                            <button type="button" class="hendelses-template-btn" data-template="narkotika">Narkotika-sak</button>
+                                            <button type="button" class="hendelses-template-btn" data-template="våpen">Våpen-sak</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hendelses-report-card hendelses-report-card-full">
+                            <div class="siktelse-straff-section">
+                                <div class="siktelse-straff-header">
+                                    <h2>Siktelse og straff</h2>
+                                    <button type="button" id="addSiktetBtn" class="add-siktet-btn">
+                                        + Legg til siktet
+                                    </button>
+                                </div>
+
+                                <div id="siktetContainer" class="siktet-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- CALLS -->
+            <div id="calls" class="page" style="display: none;">
+                <h1>Calls</h1>
+
+                <select id="callType">
+                    <option>Ran</option>
+                    <option>Trafikk</option>
+                    <option>Skudd</option>
+                    <option>Annet</option>
+                </select>
+
+                <input id="callInput" placeholder="Skriv inn call...">
+                <button onclick="test()">Ny call</button>
+
+                <ul id="callList"></ul>
+            </div>
+
+            <!-- ENHETER -->
+            <div id="enheter" class="page" style="display: none;">
+                <h1>Enheter</h1>
+                <p>Her skal enheter være</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function test() {
+            let input = document.getElementById("callInput");
+            let type = document.getElementById("callType");
+            let list = document.getElementById("callList");
+
+            let li = document.createElement("li");
+
+            let time = new Date().toLocaleTimeString();
+            li.textContent = "[" + time + "] [" + type.value + "] " + input.value;
+
+            li.onclick = function() {
+                if (li.style.textDecoration === "line-through") {
+                    li.style.textDecoration = "none";
+                    li.style.color = "black";
+                } else {
+                    li.style.textDecoration = "line-through";
+                    li.style.color = "gray";
+                }
+            };
+
+            list.appendChild(li);
+            input.value = "";
+        }
+
+        function showPage(pageId, element) {
+            let pages = document.getElementsByClassName("page");
+            let tabs = document.getElementsByClassName("tab");
+
+            for (let i = 0; i < pages.length; i++) {
+                pages[i].style.display = "none";
+            }
+
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+
+            document.getElementById(pageId).style.display = "block";
+            element.classList.add("active");
+        }
+    </script>
+
+    <script src="rapport/rapport.js"></script>
+    <script src="hendelsesrapport/hendelsesrapport.js"></script>
+    <script src="personopplysninger/personalia/personalia.js"></script>
+    <script src="personopplysninger/kjoretoy/kjoretoy.js"></script>
+</body>
+</html>
